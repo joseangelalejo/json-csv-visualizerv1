@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Alice",
+    "age": 25,
+    "city": "Madrid",
+    "salary": 50000
+  },
+  {
+    "name": "Bob",
+    "age": 30,
+    "city": "Barcelona",
+    "salary": 60000
+  },
+  {
+    "name": "Charlie",
+    "age": 35,
+    "city": "Madrid",
+    "salary": 70000
+  },
+  {
+    "name": "Diana",
+    "age": 28,
+    "city": "Valencia",
+    "salary": 55000
+  },
+  {
+    "name": "Eve",
+    "age": 32,
+    "city": "Barcelona",
+    "salary": 65000
+  }
+]

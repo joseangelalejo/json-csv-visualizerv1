@@ -1,0 +1,76 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { requireAuth } from '@/lib/auth'
+import { corsMiddleware, securityHeadersMiddleware } from '@/lib/security'
+import { rateLimitMiddleware } from '@/lib/rateLimit'
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Skip middleware for static files and Next.js internals
+  if (
+    pathname.startsWith('/_next/') ||
+    pathname.startsWith('/api/health') ||
+    pathname.includes('.') ||
+    pathname === '/favicon.ico'
+  ) {
+    return NextResponse.next()
+  }
+
+  try {
+    // Apply rate limiting first
+    const rateLimitResponse = rateLimitMiddleware(request)
+    if (rateLimitResponse) {
+      return rateLimitResponse
+    }
+
+    // Apply CORS middleware
+    const corsResponse = corsMiddleware(request)
+    if (corsResponse) {
+      return corsResponse
+    }
+
+    // Apply authentication middleware for protected routes
+    if (pathname.startsWith('/api/') && !pathname.startsWith('/api/auth/')) {
+      try {
+        requireAuth(request)
+      } catch (error) {
+        return new NextResponse('Unauthorized', { status: 401 })
+      }
+    }
+
+    // Continue with the request and add security headers
+    const response = NextResponse.next()
+
+    // Add security headers
+    const securityHeaders = securityHeadersMiddleware()
+    Object.entries(securityHeaders).forEach(([key, value]) => {
+      response.headers.set(key, value)
+    })
+
+    // Add CORS headers for allowed origins
+    const origin = request.headers.get('origin')
+    const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000', 'http://localhost:80', 'https://localhost:443']
+    if (origin && allowedOrigins.includes(origin)) {
+      response.headers.set('Access-Control-Allow-Origin', origin)
+      response.headers.set('Access-Control-Allow-Credentials', 'true')
+    }
+
+    return response
+
+  } catch (error) {
+    return new NextResponse('Internal Server Error', { status: 500 })
+  }
+}
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api/health (health check endpoint)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api/health|_next/static|_next/image|favicon.ico).*)',
+  ],
+}

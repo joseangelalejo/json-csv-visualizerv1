@@ -1,0 +1,8 @@
+{
+    "MD013": false,
+    "MD033": {
+        "allowed_elements": ["br", "div", "style", "img", "h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "a", "p", "ul", "ol", "li", "strong", "em", "code"]
+    },
+    "MD060": false,
+    "MD040": false
+}

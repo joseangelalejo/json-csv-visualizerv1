@@ -1,0 +1,752 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop Dell XPS 13",
+    "category": "Electronics",
+    "price": 1299.99,
+    "stock": 15,
+    "brand": "Dell",
+    "rating": 4.5,
+    "reviews": 120,
+    "specs": {
+      "cpu": "Intel i7",
+      "ram": "16GB",
+      "storage": "512GB SSD"
+    }
+  },
+  {
+    "id": 2,
+    "name": "iPhone 15 Pro",
+    "category": "Electronics",
+    "price": 999.99,
+    "stock": 25,
+    "brand": "Apple",
+    "rating": 4.8,
+    "reviews": 300,
+    "specs": {
+      "cpu": "A17 Pro",
+      "ram": "8GB",
+      "storage": "256GB"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Nike Air Max",
+    "category": "Footwear",
+    "price": 129.99,
+    "stock": 50,
+    "brand": "Nike",
+    "rating": 4.2,
+    "reviews": 85,
+    "specs": {
+      "size": "10",
+      "color": "Black",
+      "material": "Synthetic"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Samsung 4K TV 55\"",
+    "category": "Electronics",
+    "price": 699.99,
+    "stock": 10,
+    "brand": "Samsung",
+    "rating": 4.3,
+    "reviews": 150,
+    "specs": {
+      "resolution": "4K UHD",
+      "size": "55 inches",
+      "smart": true
+    }
+  },
+  {
+    "id": 5,
+    "name": "Adidas Ultraboost",
+    "category": "Footwear",
+    "price": 189.99,
+    "stock": 30,
+    "brand": "Adidas",
+    "rating": 4.6,
+    "reviews": 200,
+    "specs": {
+      "size": "9",
+      "color": "White",
+      "material": "Mesh"
+    }
+  },
+  {
+    "id": 6,
+    "name": "MacBook Pro 16\"",
+    "category": "Electronics",
+    "price": 2499.99,
+    "stock": 8,
+    "brand": "Apple",
+    "rating": 4.9,
+    "reviews": 400,
+    "specs": {
+      "cpu": "M3 Max",
+      "ram": "32GB",
+      "storage": "1TB SSD"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Levi's Jeans",
+    "category": "Clothing",
+    "price": 79.99,
+    "stock": 40,
+    "brand": "Levi's",
+    "rating": 4.1,
+    "reviews": 60,
+    "specs": {
+      "size": "32x32",
+      "color": "Blue",
+      "material": "Denim"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Sony WH-1000XM5",
+    "category": "Electronics",
+    "price": 349.99,
+    "stock": 20,
+    "brand": "Sony",
+    "rating": 4.7,
+    "reviews": 250,
+    "specs": {
+      "type": "Over-ear",
+      "battery": "30 hours",
+      "noise_canceling": true
+    }
+  },
+  {
+    "id": 9,
+    "name": "Puma Suede",
+    "category": "Footwear",
+    "price": 89.99,
+    "stock": 35,
+    "brand": "Puma",
+    "rating": 4.0,
+    "reviews": 90,
+    "specs": {
+      "size": "11",
+      "color": "Classic White",
+      "material": "Suede"
+    }
+  },
+  {
+    "id": 10,
+    "name": "LG Refrigerator",
+    "category": "Appliances",
+    "price": 1199.99,
+    "stock": 5,
+    "brand": "LG",
+    "rating": 4.4,
+    "reviews": 75,
+    "specs": {
+      "capacity": "25 cu ft",
+      "type": "French Door",
+      "energy_rating": "A++"
+    }
+  },
+  {
+    "id": 11,
+    "name": "H&M T-Shirt",
+    "category": "Clothing",
+    "price": 19.99,
+    "stock": 100,
+    "brand": "H&M",
+    "rating": 3.8,
+    "reviews": 45,
+    "specs": {
+      "size": "M",
+      "color": "Red",
+      "material": "Cotton"
+    }
+  },
+  {
+    "id": 12,
+    "name": "Canon EOS R5",
+    "category": "Electronics",
+    "price": 3899.99,
+    "stock": 3,
+    "brand": "Canon",
+    "rating": 4.8,
+    "reviews": 180,
+    "specs": {
+      "sensor": "45MP",
+      "lens": "RF mount",
+      "video": "8K"
+    }
+  },
+  {
+    "id": 13,
+    "name": "Under Armour Hoodie",
+    "category": "Clothing",
+    "price": 59.99,
+    "stock": 25,
+    "brand": "Under Armour",
+    "rating": 4.3,
+    "reviews": 70,
+    "specs": {
+      "size": "L",
+      "color": "Gray",
+      "material": "Fleece"
+    }
+  },
+  {
+    "id": 14,
+    "name": "Bose SoundLink",
+    "category": "Electronics",
+    "price": 199.99,
+    "stock": 18,
+    "brand": "Bose",
+    "rating": 4.5,
+    "reviews": 130,
+    "specs": {
+      "type": "Portable",
+      "battery": "12 hours",
+      "waterproof": true
+    }
+  },
+  {
+    "id": 15,
+    "name": "New Balance 574",
+    "category": "Footwear",
+    "price": 99.99,
+    "stock": 45,
+    "brand": "New Balance",
+    "rating": 4.4,
+    "reviews": 110,
+    "specs": {
+      "size": "8",
+      "color": "Navy",
+      "material": "Suede/Leather"
+    }
+  },
+  {
+    "id": 16,
+    "name": "Whirlpool Washer",
+    "category": "Appliances",
+    "price": 799.99,
+    "stock": 7,
+    "brand": "Whirlpool",
+    "rating": 4.2,
+    "reviews": 95,
+    "specs": {
+      "capacity": "5.5 cu ft",
+      "type": "Front Load",
+      "energy_rating": "A+"
+    }
+  },
+  {
+    "id": 17,
+    "name": "Zara Dress",
+    "category": "Clothing",
+    "price": 49.99,
+    "stock": 60,
+    "brand": "Zara",
+    "rating": 4.0,
+    "reviews": 55,
+    "specs": {
+      "size": "S",
+      "color": "Black",
+      "material": "Polyester"
+    }
+  },
+  {
+    "id": 18,
+    "name": "GoPro HERO10",
+    "category": "Electronics",
+    "price": 499.99,
+    "stock": 12,
+    "brand": "GoPro",
+    "rating": 4.6,
+    "reviews": 220,
+    "specs": {
+      "resolution": "5.3K",
+      "fps": "60",
+      "waterproof": true
+    }
+  },
+  {
+    "id": 19,
+    "name": "Reebok Classic",
+    "category": "Footwear",
+    "price": 79.99,
+    "stock": 55,
+    "brand": "Reebok",
+    "rating": 4.1,
+    "reviews": 80,
+    "specs": {
+      "size": "10.5",
+      "color": "White",
+      "material": "Leather"
+    }
+  },
+  {
+    "id": 20,
+    "name": "KitchenAid Mixer",
+    "category": "Appliances",
+    "price": 349.99,
+    "stock": 9,
+    "brand": "KitchenAid",
+    "rating": 4.7,
+    "reviews": 160,
+    "specs": {
+      "power": "325W",
+      "capacity": "5 qt",
+      "attachments": 5
+    }
+  },
+  {
+    "id": 21,
+    "name": "Uniqlo Sweater",
+    "category": "Clothing",
+    "price": 39.99,
+    "stock": 80,
+    "brand": "Uniqlo",
+    "rating": 4.2,
+    "reviews": 65,
+    "specs": {
+      "size": "XL",
+      "color": "Navy",
+      "material": "Wool Blend"
+    }
+  },
+  {
+    "id": 22,
+    "name": "JBL Go 3",
+    "category": "Electronics",
+    "price": 39.99,
+    "stock": 40,
+    "brand": "JBL",
+    "rating": 4.0,
+    "reviews": 100,
+    "specs": {
+      "type": "Portable",
+      "battery": "5 hours",
+      "waterproof": true
+    }
+  },
+  {
+    "id": 23,
+    "name": "Converse Chuck Taylor",
+    "category": "Footwear",
+    "price": 59.99,
+    "stock": 70,
+    "brand": "Converse",
+    "rating": 4.3,
+    "reviews": 140,
+    "specs": {
+      "size": "9",
+      "color": "Black",
+      "material": "Canvas"
+    }
+  },
+  {
+    "id": 24,
+    "name": "Dyson Vacuum",
+    "category": "Appliances",
+    "price": 599.99,
+    "stock": 6,
+    "brand": "Dyson",
+    "rating": 4.8,
+    "reviews": 300,
+    "specs": {
+      "type": "Cordless",
+      "battery": "60 minutes",
+      "filtration": "HEPA"
+    }
+  },
+  {
+    "id": 25,
+    "name": "Gap Jeans",
+    "category": "Clothing",
+    "price": 69.99,
+    "stock": 50,
+    "brand": "Gap",
+    "rating": 3.9,
+    "reviews": 50,
+    "specs": {
+      "size": "34x30",
+      "color": "Dark Wash",
+      "material": "Denim"
+    }
+  },
+  {
+    "id": 26,
+    "name": "Anker Power Bank",
+    "category": "Electronics",
+    "price": 49.99,
+    "stock": 30,
+    "brand": "Anker",
+    "rating": 4.4,
+    "reviews": 120,
+    "specs": {
+      "capacity": "20000mAh",
+      "ports": "2 USB",
+      "fast_charge": true
+    }
+  },
+  {
+    "id": 27,
+    "name": "Vans Old Skool",
+    "category": "Footwear",
+    "price": 69.99,
+    "stock": 65,
+    "brand": "Vans",
+    "rating": 4.5,
+    "reviews": 170,
+    "specs": {
+      "size": "8.5",
+      "color": "Checkerboard",
+      "material": "Canvas"
+    }
+  },
+  {
+    "id": 28,
+    "name": "Instant Pot",
+    "category": "Appliances",
+    "price": 99.99,
+    "stock": 15,
+    "brand": "Instant Pot",
+    "rating": 4.6,
+    "reviews": 250,
+    "specs": {
+      "capacity": "6 qt",
+      "functions": "7-in-1",
+      "pressure_cooker": true
+    }
+  },
+  {
+    "id": 29,
+    "name": "Old Navy T-Shirt",
+    "category": "Clothing",
+    "price": 14.99,
+    "stock": 120,
+    "brand": "Old Navy",
+    "rating": 3.7,
+    "reviews": 40,
+    "specs": {
+      "size": "L",
+      "color": "Blue",
+      "material": "Cotton"
+    }
+  },
+  {
+    "id": 30,
+    "name": "Roku Streaming Stick",
+    "category": "Electronics",
+    "price": 49.99,
+    "stock": 22,
+    "brand": "Roku",
+    "rating": 4.2,
+    "reviews": 90,
+    "specs": {
+      "resolution": "4K",
+      "voice_remote": true,
+      "apps": 500000
+    }
+  },
+  {
+    "id": 31,
+    "name": "Skechers Go Walk",
+    "category": "Footwear",
+    "price": 79.99,
+    "stock": 40,
+    "brand": "Skechers",
+    "rating": 4.3,
+    "reviews": 105,
+    "specs": {
+      "size": "7",
+      "color": "Gray",
+      "material": "Mesh"
+    }
+  },
+  {
+    "id": 32,
+    "name": "Cuisinart Coffee Maker",
+    "category": "Appliances",
+    "price": 149.99,
+    "stock": 11,
+    "brand": "Cuisinart",
+    "rating": 4.4,
+    "reviews": 85,
+    "specs": {
+      "capacity": "12 cups",
+      "programmable": true,
+      "thermal": true
+    }
+  },
+  {
+    "id": 33,
+    "name": "Banana Republic Blazer",
+    "category": "Clothing",
+    "price": 199.99,
+    "stock": 20,
+    "brand": "Banana Republic",
+    "rating": 4.5,
+    "reviews": 75,
+    "specs": {
+      "size": "42",
+      "color": "Navy",
+      "material": "Wool"
+    }
+  },
+  {
+    "id": 34,
+    "name": "Fitbit Charge 5",
+    "category": "Electronics",
+    "price": 149.99,
+    "stock": 16,
+    "brand": "Fitbit",
+    "rating": 4.3,
+    "reviews": 140,
+    "specs": {
+      "battery": "7 days",
+      "gps": true,
+      "heart_rate": true
+    }
+  },
+  {
+    "id": 35,
+    "name": "Crocs Classic",
+    "category": "Footwear",
+    "price": 39.99,
+    "stock": 90,
+    "brand": "Crocs",
+    "rating": 4.0,
+    "reviews": 200,
+    "specs": {
+      "size": "M",
+      "color": "Pink",
+      "material": "Croslite"
+    }
+  },
+  {
+    "id": 36,
+    "name": "Breville Blender",
+    "category": "Appliances",
+    "price": 249.99,
+    "stock": 8,
+    "brand": "Breville",
+    "rating": 4.7,
+    "reviews": 180,
+    "specs": {
+      "power": "1800W",
+      "capacity": "72 oz",
+      "speeds": 5
+    }
+  },
+  {
+    "id": 37,
+    "name": "Tommy Hilfiger Polo",
+    "category": "Clothing",
+    "price": 49.99,
+    "stock": 35,
+    "brand": "Tommy Hilfiger",
+    "rating": 4.1,
+    "reviews": 60,
+    "specs": {
+      "size": "M",
+      "color": "White",
+      "material": "Cotton"
+    }
+  },
+  {
+    "id": 38,
+    "name": "Logitech MX Master 3",
+    "category": "Electronics",
+    "price": 99.99,
+    "stock": 14,
+    "brand": "Logitech",
+    "rating": 4.6,
+    "reviews": 210,
+    "specs": {
+      "dpi": 4000,
+      "battery": "70 days",
+      "buttons": 7
+    }
+  },
+  {
+    "id": 39,
+    "name": "Dr. Martens Boots",
+    "category": "Footwear",
+    "price": 149.99,
+    "stock": 25,
+    "brand": "Dr. Martens",
+    "rating": 4.4,
+    "reviews": 125,
+    "specs": {
+      "size": "9",
+      "color": "Black",
+      "material": "Leather"
+    }
+  },
+  {
+    "id": 40,
+    "name": "Ninja Air Fryer",
+    "category": "Appliances",
+    "price": 129.99,
+    "stock": 13,
+    "brand": "Ninja",
+    "rating": 4.5,
+    "reviews": 190,
+    "specs": {
+      "capacity": "4 qt",
+      "temperature": "400°F",
+      "digital": true
+    }
+  },
+  {
+    "id": 41,
+    "name": "Calvin Klein Underwear",
+    "category": "Clothing",
+    "price": 29.99,
+    "stock": 75,
+    "brand": "Calvin Klein",
+    "rating": 4.2,
+    "reviews": 70,
+    "specs": {
+      "size": "M",
+      "color": "Black",
+      "material": "Cotton"
+    }
+  },
+  {
+    "id": 42,
+    "name": "Ring Doorbell",
+    "category": "Electronics",
+    "price": 179.99,
+    "stock": 19,
+    "brand": "Ring",
+    "rating": 4.3,
+    "reviews": 160,
+    "specs": {
+      "resolution": "1080p",
+      "night_vision": true,
+      "motion_detection": true
+    }
+  },
+  {
+    "id": 43,
+    "name": "Timberland Boots",
+    "category": "Footwear",
+    "price": 199.99,
+    "stock": 18,
+    "brand": "Timberland",
+    "rating": 4.5,
+    "reviews": 135,
+    "specs": {
+      "size": "10",
+      "color": "Brown",
+      "material": "Leather"
+    }
+  },
+  {
+    "id": 44,
+    "name": "Hamilton Beach Toaster",
+    "category": "Appliances",
+    "price": 39.99,
+    "stock": 28,
+    "brand": "Hamilton Beach",
+    "rating": 4.1,
+    "reviews": 55,
+    "specs": {
+      "slots": 4,
+      "functions": "Toast/Bagel",
+      "auto_shutoff": true
+    }
+  },
+  {
+    "id": 45,
+    "name": "Ralph Lauren Sweater",
+    "category": "Clothing",
+    "price": 129.99,
+    "stock": 15,
+    "brand": "Ralph Lauren",
+    "rating": 4.4,
+    "reviews": 80,
+    "specs": {
+      "size": "L",
+      "color": "Cream",
+      "material": "Cashmere"
+    }
+  },
+  {
+    "id": 46,
+    "name": "Apple Watch Series 9",
+    "category": "Electronics",
+    "price": 399.99,
+    "stock": 10,
+    "brand": "Apple",
+    "rating": 4.7,
+    "reviews": 280,
+    "specs": {
+      "display": "Always-On",
+      "health": "ECG",
+      "battery": "18 hours"
+    }
+  },
+  {
+    "id": 47,
+    "name": "ASICS Running Shoes",
+    "category": "Footwear",
+    "price": 119.99,
+    "stock": 32,
+    "brand": "ASICS",
+    "rating": 4.6,
+    "reviews": 150,
+    "specs": {
+      "size": "9.5",
+      "color": "Blue",
+      "material": "Mesh"
+    }
+  },
+  {
+    "id": 48,
+    "name": "Oster Blender",
+    "category": "Appliances",
+    "price": 79.99,
+    "stock": 17,
+    "brand": "Oster",
+    "rating": 4.2,
+    "reviews": 95,
+    "specs": {
+      "power": "700W",
+      "capacity": "6 cups",
+      "speeds": 3
+    }
+  },
+  {
+    "id": 49,
+    "name": "Hugo Boss Suit",
+    "category": "Clothing",
+    "price": 599.99,
+    "stock": 5,
+    "brand": "Hugo Boss",
+    "rating": 4.8,
+    "reviews": 40,
+    "specs": {
+      "size": "42R",
+      "color": "Charcoal",
+      "material": "Wool"
+    }
+  },
+  {
+    "id": 50,
+    "name": "Eufy Robot Vacuum",
+    "category": "Appliances",
+    "price": 299.99,
+    "stock": 12,
+    "brand": "Eufy",
+    "rating": 4.4,
+    "reviews": 175,
+    "specs": {
+      "battery": "100 minutes",
+      "app_control": true,
+      "mapping": true
+    }
+  }
+]

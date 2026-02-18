@@ -1,0 +1,58 @@
+{
+  "name": "json-csv-visualizer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "prepare:e2e": "node scripts/create-test-sqlite.js",
+    "test:e2e": "npx playwright test --reporter=list"
+  },
+  "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@xyflow/react": "^12.0.0",
+    "bcryptjs": "^3.0.3",
+    "d3": "^7.9.0",
+    "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^0.441.0",
+    "monaco-editor": "^0.44.0",
+    "mongodb": "^7.1.0",
+    "mssql": "^12.2.0",
+    "mysql2": "^3.17.0",
+    "next": "16.1.6",
+    "node-sql-parser": "^4.18.0",
+    "papaparse": "^5.5.3",
+    "pg": "^8.18.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "recharts": "^3.7.0",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/d3": "^7.4.3",
+    "@types/mssql": "^9.1.9",
+    "@types/node": "^20",
+    "@types/papaparse": "^5.5.2",
+    "@types/pg": "^8.11.10",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/sqlite3": "^3.1.11",
+    "eslint": "^10.0.0",
+    "eslint-config-next": "^0.2.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "form-data": "^4.0.0",
+    "qs": "^6.14.1",
+    "semver": "^7.6.0",
+    "tar": "^7.5.7",
+    "tough-cookie": "^4.1.3"
+  }
+}

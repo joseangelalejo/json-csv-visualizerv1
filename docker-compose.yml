@@ -1,0 +1,61 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        JWT_SECRET: ${JWT_SECRET:-build-time-placeholder-secret}
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - 'JWT_SECRET=${JWT_SECRET:?Error: JWT_SECRET no está definido. Crea un archivo .env con JWT_SECRET=tu_clave_segura}'
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-3600}
+      - USERS_DB_PATH=/app/data/users.db
+      - API_RATE_LIMIT=50
+      - SESSION_TIMEOUT=3600000
+      - LOG_LEVEL=info
+      - LOG_FILE=/app/logs/app.log
+      - BACKUP_DIR=/app/backups
+      - BACKUP_RETENTION_DAYS=30
+      - HEALTH_CHECK_DATABASE=true
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:80}
+    volumes:
+      - data:/app/data:rw
+      - logs:/app/logs:rw
+      - backups:/app/backups:rw
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/api/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - logs:/var/log/nginx:rw
+    depends_on:
+      - app
+    restart: unless-stopped
+
+  backup:
+    build: .
+    command: node scripts/backup.js
+    environment:
+      - BACKUP_DIR=/app/backups
+      - BACKUP_RETENTION_DAYS=30
+    volumes:
+      - data:/app/data:ro
+      - backups:/app/backups:rw
+    restart: "no"
+    profiles:
+      - backup
+
+volumes:
+  data:
+  logs:
+  backups:
