@@ -191,9 +191,9 @@ Este documento incluye:
 
 ---
 
-## <img src="https://img.icons8.com/color/48/000000/document.png" width="24" height="24" alt="document"/> Licencia
+## 📜 Licencia
 
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está licenciado bajo Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International — ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
 
 ---
 
