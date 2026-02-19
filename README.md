@@ -1,32 +1,26 @@
 # 🌟 JSON/CSV Data Visualizer
 
-<div align="center">
-  <h1 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-    Visualiza tus datos de forma mágica ✨
-  </h1>
-  <p>Una aplicación web moderna y elegante para explorar archivos JSON/CSV y bases de datos con tablas interactivas, gráficos dinámicos y diagramas ER.</p>
-  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
-  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React"/>
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS"/>
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
-</div>
+## Visualiza tus datos de forma mágica ✨
+
+Una aplicación web moderna y elegante para explorar archivos JSON/CSV y bases de datos con tablas interactivas, gráficos dinámicos y diagramas ER.
+
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 ---
 
-## <img src="https://img.icons8.com/color/48/000000/target.png" width="24" height="24" alt="target"/> Características Principales
+## 🎯 Características Principales
 
-<div align="center">
-
-<img src="https://img.shields.io/badge/📁_Carga_de_Archivos_JSON/CSV-667eea?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQwIDQ4SDh2LTMyYzAtNC40IDIuNC04IDYtOHMzIDMuNiA2IDh2MjRoMjR2NHYtNGMwLTQuNCAyLjQtOCA2LThzNiAzLjYgNiA4djMyeiIgZmlsbD0iI2ZmYiIvPgo8L3N2Zz4K" alt="folder"/>
-<img src="https://img.shields.io/badge/🗄️_Conexión_a_Bases_de_Datos-764ba2?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNGgyNHY0MEg0VjR6bTE2IDI0aDE2djE2SDE2djE2eiIgZmlsbD0iI2ZmYiIvPgo8L3N2Zz4K" alt="database"/>
-<img src="https://img.shields.io/badge/📊_Tablas_Interactivas-f093fb?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNmg0MHY0MEg0VjZ6bTE2IDI0aDE2djE2SDE2djE2eiIgZmlsbD0iI2ZmYiIvPgo8L3N2Zz4K" alt="table"/>
-<br/>
-<img src="https://img.shields.io/badge/📈_Gráficos_Dinámicos-667eea?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNmg0MHY0MEg0VjZ6TTQgMTZoNDB2NEg0djE2ek00IDE2aDQwdjRINHYxNnoiIGZpbGw9IiNmZmYiLz4KPC9zdmc+" alt="chart"/>
-<img src="https://img.shields.io/badge/🔄_Diagramas_ER-764ba2?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNGgyNHY0MEgNFY0em0xNiAyNGgxNnYxNkgxNnYxNnoiIGZpbGw9IiNmZmYiLz4KPC9zdmc+" alt="flowchart"/>
-<img src="https://img.shields.io/badge/⬇️_Exportación_a_CSV-f093fb?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQwIDQ4SDh2LTMyYzAtNC40IDIuNC04IDYtOHMzIDMuNiA2IDh2MjRoMjR2NHYtNGMwLTQuNCAyLjQtOCA2LThzNiAzLjYgNiA4djMyeiIgZmlsbD0iI2ZmYiIvPgo8L3N2Zz4K" alt="download"/>
-
-</div>
+- 📁 **Carga de Archivos JSON/CSV** — Exploración instantánea de datos
+- 🗄️ **Conexión a Bases de Datos** — SQLite, PostgreSQL, MySQL y MongoDB
+- 📊 **Tablas Interactivas** — Paginación, ordenación, búsqueda y filtros
+- 📈 **Gráficos Dinámicos** — Barras, líneas, pastel e histogramas
+- 🔴 **Diagramas ER** — Visualización automática de relaciones
+- ⬇️ **Exportación a CSV** — Descarga resultados en un clic
+- 💻 **IDE SQL integrado** — Editor Monaco con autocompletado y atajos
 
 ### 🗂️ Soporte para Bases de Datos
 
@@ -44,23 +38,30 @@
 
 ---
 
-## <img src="https://img.icons8.com/color/48/000000/rocket.png" width="24" height="24" alt="rocket"/> Instalación Rápida
+## 🚀 Instalación Rápida
 
-### Opción 1: <img src="https://img.icons8.com/color/48/000000/docker.png" width="20" height="20" alt="docker"/> Docker (Recomendado)
+### Opción 1: 🐳 Docker (Recomendado)
+
+> Antes de ejecutar Docker copia `.env.example` a `.env` o `.env.local` y define al menos `JWT_SECRET`. En desarrollo es conveniente que `NEXTAUTH_SECRET` coincida con `JWT_SECRET`.
 
 ```bash
-git clone https://github.com/joseangelalejo/json-csv-visualizerv1
-cd json-csv-visualizerv1
-docker-compose up --build
+git clone https://github.com/tu-usuario/json-csv-visualizer.git
+cd json-csv-visualizer
+cp .env.example .env          # o `cp .env.example .env.local`
+# Genera un JWT_SECRET fuerte (ejemplo):
+#   node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+# Pega ese valor en .env (JWT_SECRET) y, para dev, en NEXTAUTH_SECRET
+
+docker compose up --build
 ```
 
-Accede a `http://localhost`
+Accede a `http://localhost` (o `http://localhost:80` si usas el proxy `nginx`)
 
-### Opción 2: <img src="https://img.icons8.com/color/48/000000/code.png" width="20" height="20" alt="code"/> Desarrollo Local
+### Opción 2: 💻 Desarrollo Local
 
 ```bash
-git clone https://github.com/joseangelalejo/json-csv-visualizerv1
-cd json-csv-visualizerv1
+git clone https://github.com/tu-usuario/json-csv-visualizer.git
+cd json-csv-visualizer
 npm install
 npm run dev
 ```
@@ -69,33 +70,121 @@ Abre `http://localhost:3000`
 
 ---
 
-## <img src="https://img.icons8.com/color/48/000000/book.png" width="24" height="24" alt="book"/> Cómo Usar
+## 📖 Cómo Usar
 
-### 1. <img src="https://img.icons8.com/color/48/000000/folder-invoices.png" width="20" height="20" alt="folder"/> Modo Archivo
+### 1. 📁 Modo Archivo
 
-- Haz clic en "<img src="https://img.icons8.com/color/48/000000/folder-invoices.png" width="16" height="16" alt="folder"/> File Upload (JSON/CSV)"
+- Haz clic en "📁 File Upload (JSON/CSV)"
 - Selecciona tu archivo JSON o CSV
 - ¡Explora la tabla y el gráfico automáticamente!
 
-### 2. <img src="https://img.icons8.com/color/48/000000/database.png" width="20" height="20" alt="database"/> Modo Base de Datos
+---
 
-- Selecciona el tipo de base de datos
-- Ingresa las credenciales de conexión
-- Explora tablas, esquemas y datos
-- Visualiza diagramas ER y exporta resultados
+### 2. 🗄️ Modo Base de Datos
+
+La aplicación ofrece dos formas de trabajar con bases de datos: **visualización sin SQL** e **IDE SQL interactivo**.
 
 ---
 
-## <img src="https://img.icons8.com/color/48/000000/test-tube.png" width="24" height="24" alt="test"/> Pruebas
+#### 2.1 Conectarse a una Base de Datos
 
-### 🧪 Probar Conexiones de Base de Datos
+Antes de explorar o ejecutar consultas, necesitas configurar una conexión:
 
-Para probar las conexiones de base de datos sin configurar servidores reales, puedes usar SQLite con un archivo de prueba incluido:
+1. Abre el panel lateral de **Conexiones** y haz clic en **Nueva conexión**.
+2. Selecciona el tipo de base de datos: `SQLite`, `PostgreSQL`, `MySQL` o `MongoDB`.
+3. Introduce los parámetros de conexión:
+
+   | Motor      | Formato de conexión                                      |
+   | ---------- | -------------------------------------------------------- |
+   | SQLite     | Ruta al archivo, ej. `/ruta/a/mi-base.db`               |
+   | PostgreSQL | `postgresql://usuario:contraseña@host:5432/base`         |
+   | MySQL      | Objeto con `host`, `user`, `password`, `database`        |
+   | MongoDB    | `mongodb://localhost:27017/base`                         |
+
+4. Haz clic en **Probar conexión** para verificar que todo funciona.
+5. Guarda la conexión con un nombre descriptivo — se almacena en el navegador para reutilizarla.
+
+> Las conexiones guardadas aparecen en el árbol lateral. Puedes ocultar bases de datos de sistema desde las opciones del panel.
+
+---
+
+#### 2.2 Visualización de Bases de Datos (sin SQL)
+
+Explora esquemas y datos sin escribir una sola línea de SQL — ideal para inspección rápida y análisis visual.
+
+**Qué puedes hacer:**
+
+- Navega el árbol de esquemas y tablas en el panel lateral.
+- Haz clic en una tabla para abrir una **vista previa** de sus filas con paginación, ordenación, búsqueda y filtros por columna.
+- Visualiza **diagramas ER automáticos** — las relaciones entre tablas se detectan automáticamente y se muestran como un grafo interactivo.
+- Haz clic en cualquier columna para ver **estadísticas rápidas**: valores únicos, nulos, mínimo/máximo e histograma.
+- Crea **gráficos visuales** (barra, línea, pastel) a partir de las columnas con un clic.
+- Exporta cualquier resultado a **CSV** o cópialo al portapapeles.
+
+**Flujo de uso:**
+
+1. Selecciona una conexión guardada en el panel lateral.
+2. Expande el árbol de esquemas y haz clic en una tabla.
+3. Explora los datos en la vista tabular interactiva.
+4. Usa el panel **ER** para ver relaciones y saltar a tablas relacionadas.
+5. Haz clic en una columna para ver estadísticas y crear gráficos rápidos.
+6. Exporta con el botón **Exportar CSV** en la cabecera de resultados.
+
+> La vista de tablas es **de solo lectura por defecto** — no ejecuta DDL/DML sin confirmación explícita.
+
+---
+
+#### 2.3 IDE SQL Integrado
+
+La aplicación incluye un editor SQL tipo **IDE** (basado en Monaco Editor) para escribir y ejecutar consultas directamente desde el navegador.
+
+**Características del editor:**
+
+- Resaltado de sintaxis SQL, **autocompletado** de tablas/columnas, formateo automático y atajos estilo VS Code.
+- Ejecuta **selecciones de texto**, **sentencias individuales** o el **contenido completo** de la pestaña.
+- Soporte para **múltiples sentencias** en una misma ejecución y la instrucción `USE <db>` en el servidor.
+- Resultados por sentencia: tabla paginada con tiempo de ejecución, conteo de filas y opción de **exportar a CSV**.
+- **Historial de consultas** y gestión de **snippets/scripts** reutilizables.
+- Si Monaco no carga, hay un editor `textarea` como respaldo automático.
+
+**Flujo de uso:**
+
+1. Selecciona una conexión y base de datos en el panel de conexiones.
+2. Escribe tu consulta SQL en el editor.
+3. Ejecuta con `Ctrl/Cmd + Enter` (selección/sentencia) o con el botón **Ejecutar (▶)** (toda la pestaña).
+4. Revisa los resultados en la tabla inferior — tiempo de ejecución, filas devueltas y posibles errores.
+5. Exporta el resultado con el botón **Exportar CSV**.
+
+**Atajos de teclado:**
+
+| Atajo                    | Acción                                        |
+| ------------------------ | --------------------------------------------- |
+| `Ctrl/Cmd + Enter`       | Ejecutar selección o sentencia bajo el cursor |
+| `Ctrl/Cmd + Shift + F`   | Formatear SQL                                 |
+| `Ctrl/Cmd + /`           | Comentar / descomentar línea                  |
+| `Ctrl/Cmd + D`           | Seleccionar siguiente ocurrencia (multi-cursor)|
+| `Alt + ↑ / Alt + ↓`     | Mover línea arriba/abajo                      |
+| `Ctrl/Cmd + Space`       | Activar sugerencias / autocompletado          |
+| `Ctrl/Cmd + Shift + L`   | Seleccionar todas las ocurrencias resaltadas  |
+
+**Notas y buenas prácticas:**
+
+- Evita ejecutar consultas destructivas (`DROP`, `DELETE`, `TRUNCATE`) en entornos de producción desde la UI.
+- La ejecución de múltiples sentencias está gestionada por el servidor (parser + splitter) y muestra resultados por sentencia cuando procede.
+- Usa `USE <base_de_datos>` para cambiar de base de datos sin cambiar la conexión.
+
+---
+
+## 🧪 Pruebas
+
+### Probar Conexiones de Base de Datos
+
+Para probar las conexiones sin configurar servidores reales, usa SQLite con el archivo de prueba incluido:
 
 1. **SQLite (Recomendado para pruebas)**:
    - Tipo: `SQLite`
    - Connection String: `/tmp/test.db`
-   - Este archivo contiene una tabla `users` con datos de ejemplo
+   - Contiene una tabla `users` con datos de ejemplo
 
 2. **Otras Bases de Datos**:
    - **PostgreSQL**: `postgresql://user:password@localhost:5432/database`
@@ -109,7 +198,7 @@ Para probar las conexiones de base de datos sin configurar servidores reales, pu
 
 ### 🔍 Mensajes de Error Mejorados
 
-Los errores de conexión ahora proporcionan mensajes específicos:
+Los errores de conexión proporcionan mensajes específicos:
 
 - "SQLite database file does not exist"
 - "Host not found. Check the hostname/IP address."
@@ -117,8 +206,6 @@ Los errores de conexión ahora proporcionan mensajes específicos:
 - "Database does not exist. Check database name."
 
 ### 🧪 Script de Pruebas Automáticas
-
-Ejecuta el script de pruebas incluido para verificar todas las conexiones:
 
 ```bash
 ./test-db-connections.sh
@@ -131,32 +218,42 @@ Este script probará:
 - ❌ Conexión PostgreSQL con host inválido
 - ❌ Conexión MySQL con configuración inválida
 
----
+### 🔁 Pruebas E2E (Playwright)
 
-## <img src="https://img.icons8.com/color/48/000000/wrench.png" width="24" height="24" alt="wrench"/> Tecnologías Utilizadas
+```bash
+# Preparar datos de prueba
+npm run prepare:e2e
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
-  <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 10px; text-align: center;">
-    <strong>Frontend</strong><br/>
-    Next.js 16 + React 19 + TypeScript
-  </div>
-  <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 10px; text-align: center;">
-    <strong>Styling</strong><br/>
-    Tailwind CSS + Gradientes
-  </div>
-  <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 10px; text-align: center;">
-    <strong>Visualización</strong><br/>
-    Recharts + TanStack Table + React Flow
-  </div>
-  <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 10px; text-align: center;">
-    <strong>Backend</strong><br/>
-    Next.js API Routes + Docker
-  </div>
-</div>
+# Ejecutar la suite E2E
+npm run test:e2e
+```
+
+Las pruebas usan `@playwright/test` y están configuradas en `tests/e2e/`.
+
+### ⚙️ Variables de entorno
+
+- `JWT_SECRET` (requerido): clave de firma JWT. Genera con:
+  - `node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"` o `openssl rand -hex 64`
+- `NEXTAUTH_SECRET`: en desarrollo puede/debe coincidir con `JWT_SECRET`.
+- `ALLOWED_ORIGINS`, `USERS_DB_PATH`, `LOG_FILE` — ver `.env.example`.
+
+> La pipeline de CI/Actions revisa `secrets.JWT_SECRET` y, si no existe, genera un secreto temporal para el job. Se recomienda añadir `JWT_SECRET` como secret en GitHub.
 
 ---
 
-## <img src="https://img.icons8.com/color/48/000000/handshake.png" width="24" height="24" alt="handshake"/> Contribuir
+## 🔧 Tecnologías Utilizadas
+
+**Frontend** — Next.js 16 + React 19 + TypeScript
+
+**Styling** — Tailwind CSS + Gradientes
+
+**Visualización** — Recharts + TanStack Table + React Flow
+
+**Backend** — Next.js API Routes + Docker
+
+---
+
+## 🤝 Contribuir
 
 ¡Las contribuciones son bienvenidas! 🌟
 
@@ -176,9 +273,9 @@ Este script probará:
 
 ---
 
-## <img src="https://img.icons8.com/color/48/000000/server.png" width="24" height="24" alt="server"/> Despliegue en Producción
+## 🖥️ Despliegue en Producción
 
-Para información detallada sobre cómo desplegar esta aplicación en un entorno de producción con Docker, seguridad, monitoreo y acceso remoto, consulta el archivo [PRODUCTION_README.md](PRODUCTION_README.md).
+Para información detallada sobre cómo desplegar esta aplicación en producción con Docker, seguridad, monitoreo y acceso remoto, consulta el archivo [PRODUCTION_README.md](./PRODUCTION_README.md).
 
 Este documento incluye:
 
@@ -193,13 +290,10 @@ Este documento incluye:
 
 ## 📜 Licencia
 
-Este proyecto está licenciado bajo Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International — ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
+Este proyecto está licenciado bajo Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International — ver el archivo [LICENSE.md](./LICENSE.md) para más detalles.
 
 ---
 
-<div align="center">
-  <p>Hecho con ❤️ y mucho 🧠</p>
-  <p>
-    <a href="#jsoncsv-data-visualizer">Volver arriba ⬆️</a>
-  </p>
-</div>
+Hecho con ❤️ y mucho 🧠
+
+[Volver arriba ⬆️](#-jsoncsv-data-visualizer)
