@@ -15,7 +15,7 @@
  * - Explorador de esquema en sidebar
  *
  * @author José Ángel Alejo
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
@@ -163,6 +163,82 @@ export default function SqlEditor({ token }: { token: string }) {
     return () => { if (t) clearTimeout(t) }
   }, [conn.dbType, conn.connectionString, conn.config.host, conn.config.user])
 
+  // ── Registrar autocompletado en Monaco ───────────────────────────────────
+  const registerCompletions = useCallback((schemaData: SchemaTable[]) => {
+    const monaco = monacoRef.current
+    if (!monaco) return
+
+    // Limpiar el proveedor anterior si existe
+    if ((window as any).__sqlCompletionDisposable) {
+      try { (window as any).__sqlCompletionDisposable.dispose() } catch { }
+    }
+
+    const keywords = [
+      'SELECT', 'FROM', 'WHERE', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN',
+      'ON', 'GROUP BY', 'ORDER BY', 'HAVING', 'LIMIT', 'OFFSET', 'INSERT INTO',
+      'VALUES', 'UPDATE', 'SET', 'DELETE FROM', 'CREATE TABLE', 'DROP TABLE',
+      'ALTER TABLE', 'AND', 'OR', 'NOT', 'IN', 'LIKE', 'IS NULL', 'IS NOT NULL',
+      'DISTINCT', 'AS', 'UNION', 'UNION ALL', 'WITH', 'CASE', 'WHEN', 'THEN',
+      'ELSE', 'END', 'USE', 'SHOW', 'DESCRIBE', 'EXPLAIN', 'COUNT', 'SUM',
+      'AVG', 'MIN', 'MAX', 'COALESCE', 'NULLIF', 'CAST', 'CONVERT',
+    ]
+
+    const disposable = monaco.languages.registerCompletionItemProvider('sql', {
+      triggerCharacters: [' ', '.', '\n'],
+      provideCompletionItems: (model: any, position: any) => {
+        const word = model.getWordUntilPosition(position)
+        const range = {
+          startLineNumber: position.lineNumber,
+          endLineNumber: position.lineNumber,
+          startColumn: word.startColumn,
+          endColumn: word.endColumn,
+        }
+
+        const suggestions: any[] = []
+
+        // Keywords SQL
+        keywords.forEach(kw => {
+          suggestions.push({
+            label: kw,
+            kind: monaco.languages.CompletionItemKind.Keyword,
+            insertText: kw,
+            range,
+            sortText: '3' + kw,
+          })
+        })
+
+        // Tablas
+        schemaData.forEach(table => {
+          suggestions.push({
+            label: table.name,
+            kind: monaco.languages.CompletionItemKind.Class,
+            insertText: table.name,
+            detail: `Tabla (${table.columns.length} columnas)`,
+            documentation: table.columns.map(c => `${c.name}: ${c.type}`).join('\n'),
+            range,
+            sortText: '1' + table.name,
+          })
+
+          // Columnas de cada tabla
+          table.columns.forEach(col => {
+            suggestions.push({
+              label: col.name,
+              kind: monaco.languages.CompletionItemKind.Field,
+              insertText: col.name,
+              detail: `${table.name}.${col.name} (${col.type})`,
+              range,
+              sortText: '2' + col.name,
+            })
+          })
+        })
+
+        return { suggestions }
+      },
+    })
+
+      ; (window as any).__sqlCompletionDisposable = disposable
+  }, [])
+
   // ── Cargar Monaco desde CDN ───────────────────────────────────────────────
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -190,7 +266,6 @@ export default function SqlEditor({ token }: { token: string }) {
       ]
 
       let aborted = false
-      let attempt = 0
       const TIMEOUT_MS = 6000
 
       const cleanupScript = (s: HTMLScriptElement | null) => { if (!s) return; try { s.remove() } catch { } }
@@ -201,7 +276,6 @@ export default function SqlEditor({ token }: { token: string }) {
           setMonacoError('No se pudo cargar Monaco desde ningún CDN — usando editor de texto.')
           return
         }
-        attempt = i
         const { script: scriptUrl, vs: vsPath } = cdns[i]
 
         // si ya existe un loader con el mismo src, quitamos para forzar reintento
@@ -306,28 +380,17 @@ export default function SqlEditor({ token }: { token: string }) {
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyY, () => { try { (editor as any).getAction('redo').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyZ, () => { try { (editor as any).getAction('redo').run() } catch { } }) } catch { }
 
-      // Common editing shortcuts (expanded to match VS Code defaults where feasible)
+      // Common editing shortcuts
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Slash, () => { try { (editor as any).getAction('editor.action.commentLine').run() } catch { } }) } catch { }
-      // Ctrl+D -> addSelectionToNextFindMatch (select next occurrence)
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyD, () => { try { (editor as any).getAction('editor.action.addSelectionToNextFindMatch').run() } catch { } }) } catch { }
-      // Ctrl+F2 -> rename symbol
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.F2, () => { try { (editor as any).getAction('editor.action.rename').run() } catch { } }) } catch { }
-      // Chorded shortcuts (Ctrl+K then ...)
-      try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyC), () => { try { (editor as any).getAction('editor.action.commentLine').run() } catch { } }) } catch { } // Ctrl+K Ctrl+C
-      try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyU), () => { try { (editor as any).getAction('editor.action.removeCommentLine').run() } catch { } }) } catch { } // Ctrl+K Ctrl+U
-      try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyS), () => { try { (editor as any).getAction('workbench.action.openGlobalKeybindings').run() } catch { } }) } catch { } // Ctrl+K Ctrl+S (best-effort)
-      try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyX), () => { try { (editor as any).getAction('editor.action.trimTrailingWhitespace').run() } catch { } }) } catch { } // Ctrl+K Ctrl+X
-      // Select all occurrences of current selection
+      try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyC), () => { try { (editor as any).getAction('editor.action.commentLine').run() } catch { } }) } catch { }
+      try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyU), () => { try { (editor as any).getAction('editor.action.removeCommentLine').run() } catch { } }) } catch { }
+      try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyX), () => { try { (editor as any).getAction('editor.action.trimTrailingWhitespace').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyL, () => { try { (editor as any).getAction('editor.action.selectHighlights').run() } catch { } }) } catch { }
-      // Toggle indentation mode (best-effort -> attempt to run indentUsingTabs)
-      try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.Backslash), () => { try { (editor as any).getAction('editor.action.indentUsingTabs').run() } catch { } }) } catch { }
-      // Folding / unfolding
       try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.Digit0), () => { try { (editor as any).getAction('editor.foldAll').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyJ), () => { try { (editor as any).getAction('editor.unfoldAll').run() } catch { } }) } catch { }
-      // Show hover
       try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyI), () => { try { (editor as any).getAction('editor.action.showHover').run() } catch { } }) } catch { }
-
-      // Duplicate / move / delete / selection / navigation
       try { editor.addCommand(monaco.KeyMod.Alt | monaco.KeyCode.UpArrow, () => { try { (editor as any).getAction('editor.action.moveLinesUpAction').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.Alt | monaco.KeyCode.DownArrow, () => { try { (editor as any).getAction('editor.action.moveLinesDownAction').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyL, () => { try { (editor as any).getAction('editor.action.selectLines').run() } catch { } }) } catch { }
@@ -336,12 +399,18 @@ export default function SqlEditor({ token }: { token: string }) {
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyH, () => { try { (editor as any).getAction('editor.action.startFindReplaceAction').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyG, () => { try { (editor as any).getAction('editor.action.gotoLine').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyA, () => { try { (editor as any).getAction('editor.action.blockComment').run() } catch { } }) } catch { }
-
-      // Formatting / suggestions / command palette
-      try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => { try { (editor as any).getAction('editor.action.insertLineAfter').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.Shift | monaco.KeyMod.Alt | monaco.KeyCode.KeyF, () => { try { (editor as any).getAction('editor.action.formatDocument').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.chord(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, monaco.KeyCode.KeyF), () => { try { (editor as any).getAction('editor.action.formatSelection').run() } catch { } }) } catch { }
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Space, () => { try { (editor as any).getAction('editor.action.triggerSuggest').run() } catch { } }) } catch { }
+      // Acción explícita para asegurar que Ctrl/Cmd+Space dispara el autocompletado
+      try {
+        editor.addAction({
+          id: 'sqleditor.triggerSuggest',
+          label: 'Trigger suggestion (Ctrl/Cmd+Space)',
+          keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Space],
+          run: () => { try { (editor as any).getAction('editor.action.triggerSuggest').run() } catch { } }
+        })
+      } catch { }
       try { editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyP, () => { try { (editor as any).getAction('editor.action.quickCommand').run() } catch { } }) } catch { }
 
       // Guardar contenido al escribir
@@ -350,37 +419,25 @@ export default function SqlEditor({ token }: { token: string }) {
         setTabs(prev => prev.map(t => t.id === activeTabId ? { ...t, content: value, isDirty: true } : t))
       })
 
-      // --- Instrumentación temporal para depurar teclado/ratón en Monaco ---
+      // --- Instrumentación de teclado/ratón ---
       const debugDisposables: any[] = []
 
-      // 1) Eventos de teclado recibidos por Monaco
-
-
-      // 2) Cambios de cursor
-
-
-      // 2b) Cuando la selección del cursor cambia (teclado o ratón), asegurarnos de
-      // que Monaco mantiene el foco y la selección pertenece al editor — esto soluciona
-      // el caso donde Shift+Arrow selecciona pero posteriores teclas no se aplican.
       try {
-        const dSel = editor.onDidChangeCursorSelection((e: any) => {
+        const dSel = editor.onDidChangeCursorSelection((_e: any) => {
           try { editor.focus && editor.focus() } catch { }
         })
         debugDisposables.push(dSel)
       } catch { }
-      // 3) Capturar keydown a nivel de documento (fase de captura) para detectar preventDefault/stopPropagation externos
+
       const docKeyHandler = (ev: KeyboardEvent) => {
         try {
           if (!editor || !(editor as any).hasTextFocus || !(editor as any).hasTextFocus()) return
 
-          // Handle arrow navigation and selection — preserve word-wise movement when Ctrl/Meta is used
           const key = ev.key
           const arrowKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
           if (arrowKeys.includes(key)) {
-            // Let Monaco handle navigation combos with modifiers (Ctrl/Meta/Alt) natively
             if (ev.ctrlKey || ev.metaKey || ev.altKey) return
 
-            // Only intercept navigation keys when editor has focus
             try {
               ev.preventDefault(); ev.stopPropagation()
 
@@ -390,7 +447,6 @@ export default function SqlEditor({ token }: { token: string }) {
                 return
               }
 
-              // Left / Right: support normal left/right (shift-select) — word-wise handled by Monaco
               if (key === 'ArrowLeft' || key === 'ArrowRight') {
                 const isLeft = key === 'ArrowLeft'
                 const cmd = isLeft ? (ev.shiftKey ? 'cursorLeftSelect' : 'cursorLeft') : (ev.shiftKey ? 'cursorRightSelect' : 'cursorRight')
@@ -398,7 +454,6 @@ export default function SqlEditor({ token }: { token: string }) {
                 return
               }
             } catch (err) {
-              // Fallback: manually move the cursor / adjust selection
               try {
                 const p = (editor as any).getPosition()
                 const model = (editor as any).getModel()
@@ -422,24 +477,18 @@ export default function SqlEditor({ token }: { token: string }) {
       document.addEventListener('keydown', docKeyHandler, true)
       debugDisposables.push({ dispose: () => document.removeEventListener('keydown', docKeyHandler, true) })
 
-      // 4) Mousedown en el contenedor — para detectar elementos superpuestos
       const mousedownHandler = (_ev: MouseEvent) => { /* overlay detection placeholder */ }
       try { monacoContainerRef.current?.addEventListener('mousedown', mousedownHandler, true); debugDisposables.push({ dispose: () => monacoContainerRef.current?.removeEventListener('mousedown', mousedownHandler, true) }) } catch { }
 
-      // Track last mouse position inside the Monaco container so we can select statement under mouse
       const mousemoveHandler = (ev: MouseEvent) => {
-        try {
-          lastMouse.current = { x: ev.clientX, y: ev.clientY }
-        } catch { }
+        try { lastMouse.current = { x: ev.clientX, y: ev.clientY } } catch { }
       }
       try { monacoContainerRef.current?.addEventListener('mousemove', mousemoveHandler, true); debugDisposables.push({ dispose: () => monacoContainerRef.current?.removeEventListener('mousemove', mousemoveHandler, true) }) } catch { }
 
-      // Asegurar que el editor reciba foco en mouseup dentro del contenedor
-      const mouseupHandler = (ev: MouseEvent) => {
+      const mouseupHandler = (_ev: MouseEvent) => {
         try {
           const ed = monacoEditorRef.current as any
           if (!ed) return
-          // Si hay una selección en el DOM (usuario drag), forzar foco al editor
           try {
             const sel = (ed as any).getSelection && (ed as any).getSelection()
             if (sel && !(sel.startLineNumber === sel.endLineNumber && sel.startColumn === sel.endColumn)) {
@@ -450,18 +499,19 @@ export default function SqlEditor({ token }: { token: string }) {
       }
       try { monacoContainerRef.current?.addEventListener('mouseup', mouseupHandler, true); debugDisposables.push({ dispose: () => monacoContainerRef.current?.removeEventListener('mouseup', mouseupHandler, true) }) } catch { }
 
-      // Guardar referencias para limpieza cuando se haga dispose
       ; (editor as any).__debugDisposables = debugDisposables
 
       monacoEditorRef.current = editor
-      // Exponer `monaco` en desarrollo y en build normal (disponible globalmente)
       try { (window as any).monaco = monaco } catch { }
+
+      // ── Registrar autocompletado con el esquema actual (si ya está cargado) ──
+      if (schema.length > 0) {
+        registerCompletions(schema)
+      }
+
       setMonacoError(null)
       setMonacoReady(true)
     } catch (err) {
-      // no bloquear la app: caer al textarea fallback
-      // console.error intencional para facilitar diagnóstico en producción
-      // eslint-disable-next-line no-console
       console.error('initMonaco error', err)
       setMonacoError(String(err || 'Error inicializando Monaco'))
       setMonacoReady(false)
@@ -476,7 +526,6 @@ export default function SqlEditor({ token }: { token: string }) {
     if (tab && editor.getValue() !== tab.content) {
       editor.setValue(tab.content)
     }
-    // asegurarnos de que el editor está enfocado al cambiar de pestaña
     try { editor.focus && editor.focus() } catch { }
   }, [activeTabId, monacoReady])
 
@@ -507,7 +556,6 @@ export default function SqlEditor({ token }: { token: string }) {
       })
       if (res.ok) {
         setIsConnected(true)
-        // cargar lista de bases de datos (si aplica) y luego esquema
         await loadDatabases()
         await loadSchema()
       } else {
@@ -525,6 +573,11 @@ export default function SqlEditor({ token }: { token: string }) {
     setIsConnected(false)
     setSchema([])
     setResult(null)
+    // Limpiar completions al desconectar
+    if ((window as any).__sqlCompletionDisposable) {
+      try { (window as any).__sqlCompletionDisposable.dispose() } catch { }
+      delete (window as any).__sqlCompletionDisposable
+    }
   }
 
   // ── Cargar esquema ───────────────────────────────────────────────────────
@@ -538,14 +591,15 @@ export default function SqlEditor({ token }: { token: string }) {
       })
       if (res.ok) {
         const json = await res.json()
-        setSchema((json.schema || []).map((t: any) => ({ ...t, expanded: false })))
+        const schemaData = (json.schema || []).map((t: any) => ({ ...t, expanded: false }))
+        setSchema(schemaData)
+        registerCompletions(schemaData) // ← Registrar autocompletado con el nuevo esquema
       }
     } catch { /* silencioso */ }
     finally { setLoadingSchema(false) }
   }
 
   const loadDatabases = async () => {
-    // Only for DBMS that support multiple DBs
     if (!conn || conn.dbType === 'sqlite') { setDatabases([]); return }
     setLoadingDatabases(true)
     try {
@@ -598,9 +652,6 @@ export default function SqlEditor({ token }: { token: string }) {
       const json = await res.json()
       const ms = Date.now() - start
 
-      // If the query contains a session-changing command like `USE dbname;`,
-      // update the client-side connection so subsequent requests use the selected DB.
-      // Support scripts that include multiple statements (find last USE in script).
       const useRegex = /USE\s+([`']?)([\w\-\.]+)\1/gi
       let lastUse: RegExpExecArray | null = null
       while (true) {
@@ -611,7 +662,6 @@ export default function SqlEditor({ token }: { token: string }) {
       if (lastUse && res.ok) {
         const selectedDb = lastUse[2]
         setConn(c => ({ ...c, config: { ...c.config, database: selectedDb } }))
-        // refresh schema for the newly selected DB
         setTimeout(() => { loadSchema(); loadDatabases() }, 50)
       }
 
@@ -676,7 +726,6 @@ export default function SqlEditor({ token }: { token: string }) {
     })
     setSaveScriptName('')
     setShowSaveDialog(false)
-    // Marcar pestaña como guardada
     setTabs(prev => prev.map(t => t.id === activeTabId ? { ...t, title: script.name, isDirty: false } : t))
   }
 
@@ -684,7 +733,6 @@ export default function SqlEditor({ token }: { token: string }) {
     const newTab: EditorTab = { id: uid(), title: script.name, content: script.content, isDirty: false }
     setTabs(prev => [...prev, newTab])
     setActiveTabId(newTab.id)
-    // focus when loaded
     setTimeout(() => { try { (monacoEditorRef.current as any)?.focus() } catch { } }, 50)
   }
 
@@ -728,7 +776,6 @@ export default function SqlEditor({ token }: { token: string }) {
     const editor = monacoEditorRef.current as any
     if (!editor) return
     const raw = editor.getValue()
-    // Formateo básico: keywords en mayúsculas, indentación
     const keywords = ['SELECT', 'FROM', 'WHERE', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'ON',
       'GROUP BY', 'ORDER BY', 'HAVING', 'LIMIT', 'OFFSET', 'INSERT INTO', 'VALUES', 'UPDATE', 'SET',
       'DELETE FROM', 'CREATE TABLE', 'DROP TABLE', 'ALTER TABLE', 'AND', 'OR', 'NOT', 'IN', 'LIKE', 'IS NULL',
@@ -737,7 +784,6 @@ export default function SqlEditor({ token }: { token: string }) {
     keywords.forEach(kw => {
       formatted = formatted.replace(new RegExp(`\\b${kw}\\b`, 'gi'), kw)
     })
-      // Saltos de línea antes de keywords principales
       ;['SELECT', 'FROM', 'WHERE', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'GROUP BY', 'ORDER BY',
         'HAVING', 'LIMIT', 'UNION', 'WITH'].forEach(kw => {
           formatted = formatted.replace(new RegExp(`\\s+${kw}\\b`, 'g'), `\n${kw}`)
@@ -831,7 +877,6 @@ export default function SqlEditor({ token }: { token: string }) {
     return stmts
   }
 
-  // Find statement bounds containing an offset
   function findStatementAtOffset(sql: string, offset: number) {
     const stmts = getStatementsWithOffsets(sql)
     for (const s of stmts) {
@@ -840,7 +885,6 @@ export default function SqlEditor({ token }: { token: string }) {
     return null
   }
 
-  // Execute a provided SQL string (reused by runQuery and runSelection)
   const executeQueryString = async (queryToRun: string) => {
     if (!isConnected || running) return
     if (!queryToRun || !queryToRun.trim()) return
@@ -856,7 +900,6 @@ export default function SqlEditor({ token }: { token: string }) {
       const json = await res.json()
       const ms = Date.now() - start
 
-      // Apply USE if present in script (last occurrence)
       const useRegex = /USE\s+([`']?)([\w\-\.]+)\1/gi
       let lastUse: RegExpExecArray | null = null
       while (true) {
@@ -890,7 +933,6 @@ export default function SqlEditor({ token }: { token: string }) {
     }
   }
 
-  // Run selection or current statement under cursor
   const runSelection = async () => {
     const editor: any = monacoEditorRef.current
     if (editor) {
@@ -898,14 +940,12 @@ export default function SqlEditor({ token }: { token: string }) {
       const selectedText = editor.getModel()?.getValueInRange(selection)?.trim()
       if (selectedText) return executeQueryString(selectedText)
 
-      // no selection — use caret position
       const pos = editor.getPosition()
       const model = editor.getModel()
       const offset = model.getOffsetAt(pos)
       const sql = model.getValue()
       const stmt = findStatementAtOffset(sql, offset)
       if (stmt) {
-        // select it visually
         const startPos = model.getPositionAt(stmt.start)
         const endPos = model.getPositionAt(stmt.end)
         editor.setSelection({ startLineNumber: startPos.lineNumber, startColumn: startPos.column, endLineNumber: endPos.lineNumber, endColumn: endPos.column })
@@ -913,7 +953,6 @@ export default function SqlEditor({ token }: { token: string }) {
         return executeQueryString(stmt.text)
       }
     } else {
-      // textarea fallback
       const ta = monacoContainerRef.current?.querySelector('textarea') as HTMLTextAreaElement | null
       if (!ta) return
       const val = ta.value
@@ -923,7 +962,6 @@ export default function SqlEditor({ token }: { token: string }) {
         const txt = val.slice(stmt.start, stmt.end).trim()
         return executeQueryString(txt)
       }
-      // if selection exists
       if (ta.selectionEnd > ta.selectionStart) {
         const txt = val.slice(ta.selectionStart, ta.selectionEnd).trim()
         return executeQueryString(txt)
@@ -931,15 +969,12 @@ export default function SqlEditor({ token }: { token: string }) {
     }
   }
 
-  // Track last mouse position inside Monaco container for "select under mouse"
   const lastMouse = useRef<{ x: number; y: number } | null>(null)
   const selectStatementUnderMouse = () => {
     const editor: any = monacoEditorRef.current
     const rect = monacoContainerRef.current?.getBoundingClientRect()
     const lm = lastMouse.current
     if (!editor || !rect || !lm) return
-    const clientX = lm.x - rect.left
-    const clientY = lm.y - rect.top
     try {
       const target = (editor.getTargetAtClientPoint && editor.getTargetAtClientPoint(lm.x, lm.y)) || null
       const pos = target?.position || editor.getPosition()
@@ -1053,7 +1088,6 @@ export default function SqlEditor({ token }: { token: string }) {
             </button>
           </div>
         ) : (
-          /* Barra compacta cuando está conectado */
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-2">
               <CheckCircle2 size={16} className="text-green-500" />
@@ -1086,7 +1120,6 @@ export default function SqlEditor({ token }: { token: string }) {
 
         {/* ── Sidebar izquierdo ─────────────────────────────────────────── */}
         <div className="w-64 flex-shrink-0 flex flex-col gap-2">
-          {/* Botones de panel */}
           <div className="flex gap-1 bg-white border border-gray-200 rounded-xl p-1">
             {([
               { id: 'schema', icon: <Database size={14} />, label: 'Esquema' },
@@ -1102,12 +1135,10 @@ export default function SqlEditor({ token }: { token: string }) {
             ))}
           </div>
 
-          {/* Panel activo */}
           <div className="flex-1 bg-white border border-gray-200 rounded-xl overflow-hidden flex flex-col" style={{ maxHeight: '60vh' }}>
             {/* Esquema */}
             {sidePanel === 'schema' && (
               <div className="flex flex-col h-full">
-                {/* Databases selector (when applicable) */}
                 {conn.dbType !== 'sqlite' && (isConnected || conn.connectionString || conn.config.host || conn.config.user) && (
                   <div className="px-3 py-2 border-b border-gray-100 flex items-center gap-2">
                     <div className="flex-1">
@@ -1117,7 +1148,6 @@ export default function SqlEditor({ token }: { token: string }) {
                         onChange={v => {
                           const dbName = String(v || '')
                           setConn(c => ({ ...c, config: { ...c.config, database: dbName } }))
-                          // recargar esquema para la BD seleccionada
                           setTimeout(() => { loadSchema() }, 20)
                         }}
                         options={[{ value: '', label: '<Selecciona una base>' }, ...databases.map(d => ({ value: d, label: d }))]}
@@ -1371,18 +1401,13 @@ export default function SqlEditor({ token }: { token: string }) {
               try {
                 if (ed?.focus) {
                   try { ed.focus() } catch { }
-
-                  // If user already has a non-empty selection, don't collapse it by setting position.
                   try {
                     const sel = (ed as any).getSelection && (ed as any).getSelection()
                     if (sel && !(sel.startLineNumber === sel.endLineNumber && sel.startColumn === sel.endColumn)) {
-                      // there is an active selection — do not change position
                       return
                     }
                   } catch { /* ignore */ }
 
-                  // Only map the click to a Monaco position when the event did NOT originate
-                  // from inside Monaco's own DOM (so we don't interfere with mouse selection).
                   const clickedInsideMonaco = (ev.target as HTMLElement)?.closest?.('.monaco-editor')
                   if (clickedInsideMonaco) return
 
@@ -1476,7 +1501,6 @@ export default function SqlEditor({ token }: { token: string }) {
               </div>
             ) : (
               <>
-                {/* Barra de estado de resultados */}
                 <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100 bg-gray-50 flex-wrap gap-2">
                   <div className="flex items-center gap-3">
                     <span className="flex items-center gap-1 text-xs text-green-600 font-medium">
@@ -1511,7 +1535,6 @@ export default function SqlEditor({ token }: { token: string }) {
                   </div>
                 </div>
 
-                {/* Tabla de resultados */}
                 <div className="overflow-auto flex-1">
                   <table className="min-w-full text-xs">
                     <thead className="sticky top-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
