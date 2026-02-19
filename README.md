@@ -45,8 +45,8 @@ Una aplicación web moderna y elegante para explorar archivos JSON/CSV y bases d
 > Antes de ejecutar Docker copia `.env.example` a `.env` o `.env.local` y define al menos `JWT_SECRET`. En desarrollo es conveniente que `NEXTAUTH_SECRET` coincida con `JWT_SECRET`.
 
 ```bash
-git clone https://github.com/tu-usuario/json-csv-visualizer.git
-cd json-csv-visualizer
+git clone https://github.com/joseangelalejo/json-csv-visualizerv1.git
+cd json-csv-visualizerv1
 cp .env.example .env          # o `cp .env.example .env.local`
 # Genera un JWT_SECRET fuerte (ejemplo):
 #   node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
@@ -60,8 +60,8 @@ Accede a `http://localhost` (o `http://localhost:80` si usas el proxy `nginx`)
 ### Opción 2: 💻 Desarrollo Local
 
 ```bash
-git clone https://github.com/tu-usuario/json-csv-visualizer.git
-cd json-csv-visualizer
+git clone https://github.com/joseangelalejo/json-csv-visualizerv1.git
+cd json-csv-visualizerv1
 npm install
 npm run dev
 ```
@@ -94,12 +94,12 @@ Antes de explorar o ejecutar consultas, necesitas configurar una conexión:
 2. Selecciona el tipo de base de datos: `SQLite`, `PostgreSQL`, `MySQL` o `MongoDB`.
 3. Introduce los parámetros de conexión:
 
-   | Motor      | Formato de conexión                                      |
-   | ---------- | -------------------------------------------------------- |
-   | SQLite     | Ruta al archivo, ej. `/ruta/a/mi-base.db`               |
-   | PostgreSQL | `postgresql://usuario:contraseña@host:5432/base`         |
-   | MySQL      | Objeto con `host`, `user`, `password`, `database`        |
-   | MongoDB    | `mongodb://localhost:27017/base`                         |
+   | Motor      | Formato de conexión                               |
+   |------------|---------------------------------------------------|
+   | SQLite     | Ruta al archivo, ej. `/ruta/a/mi-base.db`         |
+   | PostgreSQL | `postgresql://usuario:contraseña@host:5432/base`  |
+   | MySQL      | Objeto con `host`, `user`, `password`, `database` |
+   | MongoDB    | `mongodb://localhost:27017/base`                  |
 
 4. Haz clic en **Probar conexión** para verificar que todo funciona.
 5. Guarda la conexión con un nombre descriptivo — se almacena en el navegador para reutilizarla.
@@ -157,15 +157,15 @@ La aplicación incluye un editor SQL tipo **IDE** (basado en Monaco Editor) para
 
 **Atajos de teclado:**
 
-| Atajo                    | Acción                                        |
-| ------------------------ | --------------------------------------------- |
-| `Ctrl/Cmd + Enter`       | Ejecutar selección o sentencia bajo el cursor |
-| `Ctrl/Cmd + Shift + F`   | Formatear SQL                                 |
-| `Ctrl/Cmd + /`           | Comentar / descomentar línea                  |
-| `Ctrl/Cmd + D`           | Seleccionar siguiente ocurrencia (multi-cursor)|
-| `Alt + ↑ / Alt + ↓`     | Mover línea arriba/abajo                      |
-| `Ctrl/Cmd + Space`       | Activar sugerencias / autocompletado          |
-| `Ctrl/Cmd + Shift + L`   | Seleccionar todas las ocurrencias resaltadas  |
+| Atajo                  | Acción                                          |
+|------------------------|-------------------------------------------------|
+| `Ctrl/Cmd + Enter`     | Ejecutar selección o sentencia bajo el cursor   |
+| `Ctrl/Cmd + Shift + F` | Formatear SQL                                   |
+| `Ctrl/Cmd + /`         | Comentar / descomentar línea                    |
+| `Ctrl/Cmd + D`         | Seleccionar siguiente ocurrencia (multi-cursor) |
+| `Alt + ↑ / Alt + ↓`    | Mover línea arriba/abajo                        |
+| `Ctrl/Cmd + Space`     | Activar sugerencias / autocompletado            |
+| `Ctrl/Cmd + Shift + L` | Seleccionar todas las ocurrencias resaltadas    |
 
 **Notas y buenas prácticas:**
 
