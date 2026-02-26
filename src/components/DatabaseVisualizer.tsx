@@ -275,11 +275,11 @@ export default function DatabaseVisualizer({ token }: { token: string }) {
           </h2>
 
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 text-sm text-blue-700">
-            <p className="font-semibold text-blue-800 mb-1">💡 Instrucciones por tipo:</p>
-            <p><strong>SQLite:</strong> Ruta relativa, p.ej. <code>./database.db</code></p>
-            <p><strong>MySQL:</strong> Host, puerto (3306), usuario, contraseña, base de datos</p>
-            <p><strong>PostgreSQL:</strong> Host, puerto (5432), usuario, contraseña, base de datos</p>
-            <p><strong>MongoDB:</strong> Host, puerto (27017), usuario, contraseña, base de datos</p>
+            <p className="font-semibold text-blue-800 mb-2">🧪 Base de datos de demo disponible:</p>
+            <p><strong>Host:</strong> <code className="text-xs">ep-falling-flower-ai9ck030-pooler.c-4.us-east-1.aws.neon.tech</code></p>
+            <p><strong>Puerto:</strong> <code>5432</code> · <strong>BD:</strong> <code>neondb</code></p>
+            <p><strong>Solo lectura →</strong> usuario: <code>demo_readonly</code> · contraseña: <code>Demo_Read_2024!</code></p>
+            <p><strong>Editor →</strong> usuario: <code>demo_editor</code> · contraseña: <code>Demo_Edit_2024!</code></p>
           </div>
 
           <form onSubmit={e => { e.preventDefault(); connectToDatabase() }} className="space-y-6">
@@ -308,7 +308,7 @@ export default function DatabaseVisualizer({ token }: { token: string }) {
               <>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Host / IP</label>
-                  <ProtectedInput placeholder="e.g., localhost" type="text" value={host} onChange={setHost} className={inputClass} />
+                  <ProtectedInput placeholder="ep-falling-flower-ai9ck030-pooler.c-4.us-east-1.aws.neon.tech" type="text" value={host} onChange={setHost} className={inputClass} />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Puerto</label>
@@ -319,12 +319,12 @@ export default function DatabaseVisualizer({ token }: { token: string }) {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Base de datos / Schema</label>
-                  <ProtectedInput placeholder="e.g., mydatabase" type="text" value={database} onChange={setDatabase} className={inputClass} />
+                  <ProtectedInput placeholder="neondb" type="text" value={database} onChange={setDatabase} className={inputClass} />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Usuario</label>
                   <ProtectedInput
-                    placeholder={dbType === 'postgres' ? 'postgres' : dbType === 'mysql' ? 'root' : 'admin'}
+                    placeholder={dbType === 'postgres' ? 'demo_readonly' : dbType === 'mysql' ? 'root' : 'admin'}
                     type="text" value={username} onChange={setUsername} className={inputClass}
                   />
                 </div>

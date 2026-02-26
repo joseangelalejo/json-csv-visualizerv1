@@ -1046,7 +1046,7 @@ export default function SqlEditor({ token }: { token: string }) {
                 <>
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">Host</label>
-                    <ProtectedInput type="text" placeholder="localhost" value={conn.config.host}
+                    <ProtectedInput type="text" placeholder="ep-falling-flower-ai9ck030-pooler.c-4.us-east-1.aws.neon.tech" value={conn.config.host}
                       onChange={v => setConn(c => ({ ...c, config: { ...c.config, host: v } }))} className={inputCls} />
                   </div>
                   <div>
@@ -1056,12 +1056,12 @@ export default function SqlEditor({ token }: { token: string }) {
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">Base de datos</label>
-                    <ProtectedInput type="text" placeholder="mydb" value={conn.config.database}
+                    <ProtectedInput type="text" placeholder="neondb" value={conn.config.database}
                       onChange={v => setConn(c => ({ ...c, config: { ...c.config, database: v } }))} className={inputCls} />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">Usuario</label>
-                    <ProtectedInput type="text" placeholder="user" value={conn.config.user}
+                    <ProtectedInput type="text" placeholder="demo_readonly" value={conn.config.user}
                       onChange={v => setConn(c => ({ ...c, config: { ...c.config, user: v } }))} className={inputCls} />
                   </div>
                   <div>
