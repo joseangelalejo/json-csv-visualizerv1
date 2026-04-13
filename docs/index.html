@@ -1,57 +1,265 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Explorer & Web IDE — Documentación</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #e2e8f0;
             min-height: 100vh;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        header { text-align: center; padding: 60px 0 40px; border-bottom: 1px solid rgba(51,65,85,0.5); margin-bottom: 50px; }
-        h1 { font-size: 2.5em; font-weight: 800; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
-        .subtitle { color: #94a3b8; font-size: 1.1em; margin-bottom: 20px; }
-        .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
-        .badge { padding: 4px 12px; border-radius: 99px; font-size: 0.8em; font-weight: 600; }
-        .badge-blue { background: rgba(49,120,198,0.2); border: 1px solid #3178c6; color: #7aa2f7; }
-        .badge-green { background: rgba(104,160,99,0.2); border: 1px solid #68a063; color: #9ece6a; }
-        .badge-cyan { background: rgba(56,178,172,0.2); border: 1px solid #38b2ac; color: #56b6c2; }
-        .links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9em; transition: all 0.2s; }
-        .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
-        .btn-outline { border: 1px solid #06b6d4; color: #06b6d4; background: rgba(6,182,212,0.05); }
-        .btn-outline:hover { background: #06b6d4; color: #0f172a; }
-        .section { background: rgba(30,41,59,0.8); border: 1px solid rgba(51,65,85,0.5); border-radius: 12px; padding: 28px; margin-bottom: 24px; }
-        .section:hover { border-color: #667eea; }
-        h2 { font-size: 1.3em; color: #667eea; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-        h3 { font-size: 1em; color: #f1f5f9; margin: 14px 0 6px; }
-        p { color: #cbd5e1; font-size: 0.95em; line-height: 1.7; margin-bottom: 10px; }
-        ul { color: #cbd5e1; font-size: 0.95em; padding-left: 20px; }
-        ul li { margin-bottom: 6px; line-height: 1.6; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 14px; }
-        .feature { background: rgba(102,126,234,0.1); border: 1px solid rgba(102,126,234,0.3); border-radius: 8px; padding: 14px; }
-        .feature-icon { font-size: 1.5em; margin-bottom: 8px; }
-        .feature h4 { color: #f1f5f9; font-size: 0.9em; margin-bottom: 4px; }
-        .feature p { color: #94a3b8; font-size: 0.82em; margin: 0; }
-        code { background: rgba(102,126,234,0.15); color: #c3b1e1; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
-        pre { background: rgba(15,23,42,0.8); border: 1px solid rgba(51,65,85,0.5); border-radius: 8px; padding: 16px; overflow-x: auto; font-family: monospace; font-size: 0.88em; color: #a9b1d6; margin: 12px 0; }
-        .db-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
-        .db-item { background: rgba(118,75,162,0.1); border: 1px solid rgba(118,75,162,0.3); border-radius: 6px; padding: 10px 14px; font-size: 0.88em; color: #c3b1e1; }
-        footer { text-align: center; padding: 30px; color: #475569; font-size: 0.85em; border-top: 1px solid rgba(51,65,85,0.3); margin-top: 40px; }
-        footer a { color: #667eea; text-decoration: none; }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .badge-blue {
+            background: rgba(49, 120, 198, 0.2);
+            border: 1px solid #3178c6;
+            color: #7aa2f7;
+        }
+
+        .badge-green {
+            background: rgba(104, 160, 99, 0.2);
+            border: 1px solid #68a063;
+            color: #9ece6a;
+        }
+
+        .badge-cyan {
+            background: rgba(56, 178, 172, 0.2);
+            border: 1px solid #38b2ac;
+            color: #56b6c2;
+        }
+
+        .links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid #06b6d4;
+            color: #06b6d4;
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        .btn-outline:hover {
+            background: #06b6d4;
+            color: #0f172a;
+        }
+
+        .section {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .section:hover {
+            border-color: #667eea;
+        }
+
+        h2 {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 1em;
+            color: #f1f5f9;
+            margin: 14px 0 6px;
+        }
+
+        p {
+            color: #cbd5e1;
+            font-size: 0.95em;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            color: #cbd5e1;
+            font-size: 0.95em;
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .feature {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .feature-icon {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+
+        .feature h4 {
+            color: #f1f5f9;
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+
+        .feature p {
+            color: #94a3b8;
+            font-size: 0.82em;
+            margin: 0;
+        }
+
+        code {
+            background: rgba(102, 126, 234, 0.15);
+            color: #c3b1e1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 0.88em;
+            color: #a9b1d6;
+            margin: 12px 0;
+        }
+
+        .db-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .db-item {
+            background: rgba(118, 75, 162, 0.1);
+            border: 1px solid rgba(118, 75, 162, 0.3);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.88em;
+            color: #c3b1e1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #475569;
+            font-size: 0.85em;
+            border-top: 1px solid rgba(51, 65, 85, 0.3);
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
-            <h1><svg fill="currentColor" viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/></svg> Data Explorer & Web IDE</h1>
-            <p class="subtitle">Explora archivos JSON/CSV y bases de datos con tablas interactivas, gráficos dinámicos y diagramas ER</p>
+            <h1><svg fill="currentColor" viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                        stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round" />
+                </svg> Data Explorer & Web IDE</h1>
+            <p class="subtitle">Explora archivos JSON/CSV y bases de datos con tablas interactivas, gráficos dinámicos y
+                diagramas ER</p>
             <div class="badges">
                 <span class="badge badge-blue">Next.js 16</span>
                 <span class="badge badge-blue">TypeScript</span>
@@ -60,36 +268,68 @@
                 <span class="badge badge-green">Docker</span>
             </div>
             <div class="links">
-                <a href="https://json-csv-visualizerv1.vercel.app" target="_blank" class="btn btn-primary"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M12 2v10M12 2l-2.5 4h5L12 2z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="14" r="3" stroke="currentColor" stroke-width="1"/><path d="M9 19c-1 1-2 3-2 3M15 19c1 1 2 3 2 3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg> Demo en vivo</a>
-                <a href="https://github.com/joseangelalejo/json-csv-visualizerv1" target="_blank" class="btn btn-outline">⭐ GitHub</a>
+                <a href="https://json-csv-visualizerv1.vercel.app" target="_blank" class="btn btn-primary"><svg
+                        fill="none" viewBox="0 0 24 24" width="18" height="18">
+                        <path d="M12 2v10M12 2l-2.5 4h5L12 2z" stroke="currentColor" stroke-width="1"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="12" cy="14" r="3" stroke="currentColor" stroke-width="1" />
+                        <path d="M9 19c-1 1-2 3-2 3M15 19c1 1 2 3 2 3" stroke="currentColor" stroke-width="1"
+                            stroke-linecap="round" />
+                    </svg> Demo en vivo</a>
+                <a href="https://github.com/joseangelalejo/json-csv-visualizerv1" target="_blank"
+                    class="btn btn-outline">⭐ GitHub</a>
             </div>
         </header>
 
         <div class="section">
-            <h2><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg> Características</h2>
+            <h2 data-es="Características" data-en="Features"><svg fill="none" viewBox="0 0 24 24" width="18"
+                    height="18">
+                    <path
+                        d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"
+                        stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+                </svg> Características</h2>
             <div class="features-grid">
                 <div class="feature">
-                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M3 5a2 2 0 0 1 2-2h6l2 3h8a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M3 5a2 2 0 0 1 2-2h6l2 3h8a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5z"
+                                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg></div>
                     <h4>Carga JSON / CSV</h4>
                     <p>Arrastra o selecciona tus archivos para explorarlos al instante</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M3 6h18M3 12h18M3 18h18M3 21h18" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="3" width="18" height="3" stroke="currentColor" stroke-width="1"/><rect x="3" y="9" width="18" height="3" stroke="currentColor" stroke-width="1"/><rect x="3" y="15" width="18" height="3" stroke="currentColor" stroke-width="1"/></svg></div>
+                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M3 6h18M3 12h18M3 18h18M3 21h18" stroke="currentColor" stroke-width="1.5" />
+                            <rect x="3" y="3" width="18" height="3" stroke="currentColor" stroke-width="1" />
+                            <rect x="3" y="9" width="18" height="3" stroke="currentColor" stroke-width="1" />
+                            <rect x="3" y="15" width="18" height="3" stroke="currentColor" stroke-width="1" />
+                        </svg></div>
                     <h4>Conexión a BD</h4>
                     <p>SQLite, PostgreSQL, MySQL y MongoDB</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M2 20h20M6 16v4M12 10v10M18 6v14" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
+                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M2 20h20M6 16v4M12 10v10M18 6v14" stroke="currentColor" stroke-width="1"
+                                stroke-linecap="round" />
+                        </svg></div>
                     <h4>Tablas interactivas</h4>
                     <p>Filtrado, ordenación y paginación con TanStack Table</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M2 20h20M4 14l3-3 4 4 5-5 4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M2 20h20M4 14l3-3 4 4 5-5 4 4" stroke="currentColor" stroke-width="1"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg></div>
                     <h4>Gráficos dinámicos</h4>
                     <p>Visualización de datos con Recharts</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M2 12a10 10 0 1 1 20 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M20 5l2.5 2.5-2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M2 12a10 10 0 1 1 20 0" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" />
+                            <path d="M20 5l2.5 2.5-2.5 2.5" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg></div>
                     <h4>Diagramas ER</h4>
                     <p>Relaciones entre tablas generadas automáticamente</p>
                 </div>
@@ -102,30 +342,59 @@
         </div>
 
         <div class="section">
-            <h2><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M3 6h18M3 12h18M3 18h18M3 21h18" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="3" width="18" height="3" stroke="currentColor" stroke-width="1"/><rect x="3" y="9" width="18" height="3" stroke="currentColor" stroke-width="1"/><rect x="3" y="15" width="18" height="3" stroke="currentColor" stroke-width="1"/></svg> Bases de datos soportadas</h2>
+            <h2 data-es="Bases de datos soportadas" data-en="Supported Databases"><svg fill="none" viewBox="0 0 24 24"
+                    width="18" height="18">
+                    <path d="M3 6h18M3 12h18M3 18h18M3 21h18" stroke="currentColor" stroke-width="1.5" />
+                    <rect x="3" y="3" width="18" height="3" stroke="currentColor" stroke-width="1" />
+                    <rect x="3" y="9" width="18" height="3" stroke="currentColor" stroke-width="1" />
+                    <rect x="3" y="15" width="18" height="3" stroke="currentColor" stroke-width="1" />
+                </svg> Bases de datos soportadas</h2>
             <div class="db-grid">
-                <div class="db-item"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M3 12l5 5L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> SQLite</div>
-                <div class="db-item"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M3 12l5 5L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> PostgreSQL</div>
-                <div class="db-item"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M3 12l5 5L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> MySQL</div>
-                <div class="db-item"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M3 12l5 5L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> MongoDB</div>
+                <div class="db-item"><svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                        <path d="M3 12l5 5L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg> SQLite</div>
+                <div class="db-item"><svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                        <path d="M3 12l5 5L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg> PostgreSQL</div>
+                <div class="db-item"><svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                        <path d="M3 12l5 5L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg> MySQL</div>
+                <div class="db-item"><svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                        <path d="M3 12l5 5L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg> MongoDB</div>
             </div>
         </div>
 
         <div class="section">
-            <h2><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M12 2v10M12 2l-2.5 4h5L12 2z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="14" r="3" stroke="currentColor" stroke-width="1"/><path d="M9 19c-1 1-2 3-2 3M15 19c1 1 2 3 2 3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg> Instalación rápida</h2>
-            <h3>Docker (recomendado)</h3>
+            <h2 data-es="Instalación rápida" data-en="Quick Installation"><svg fill="none" viewBox="0 0 24 24"
+                    width="18" height="18">
+                    <path d="M12 2v10M12 2l-2.5 4h5L12 2z" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <circle cx="12" cy="14" r="3" stroke="currentColor" stroke-width="1" />
+                    <path d="M9 19c-1 1-2 3-2 3M15 19c1 1 2 3 2 3" stroke="currentColor" stroke-width="1"
+                        stroke-linecap="round" />
+                </svg> Instalación rápida</h2>
+            <h3 data-es="Docker (recomendado)" data-en="Docker (recommended)">Docker (recomendado)</h3>
             <pre>git clone https://github.com/joseangelalejo/json-csv-visualizerv1.git
 cd json-csv-visualizerv1
 docker-compose up --build</pre>
             <p>Accede a <code>http://localhost</code></p>
-            <h3>Desarrollo local</h3>
+            <h3 data-es="Desarrollo local" data-en="Local Development">Desarrollo local</h3>
             <pre>npm install
 npm run dev</pre>
             <p>Accede a <code>http://localhost:3000</code></p>
         </div>
 
         <div class="section">
-            <h2><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M6.5 17.5c-.83.83-2.17.83-3 0m13-11l-2.83 2.83M15 5l6 6m-4.5 1.5L8.5 8.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg> Stack técnico</h2>
+            <h2 data-es="Stack técnico" data-en="Tech Stack"><svg fill="none" viewBox="0 0 24 24" width="18"
+                    height="18">
+                    <path d="M6.5 17.5c-.83.83-2.17.83-3 0m13-11l-2.83 2.83M15 5l6 6m-4.5 1.5L8.5 8.5"
+                        stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+                </svg> Stack técnico</h2>
             <ul>
                 <li><strong>Frontend:</strong> Next.js 16 + React 19 + TypeScript</li>
                 <li><strong>Estilos:</strong> Tailwind CSS</li>
@@ -136,11 +405,16 @@ npm run dev</pre>
         </div>
 
         <footer>
-            <p>Hecho con <svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="1" fill="none"/></svg>️ por <a href="https://github.com/joseangelalejo">joseangelalejo</a> · <a href="https://joseangelhub.miniserver.online">Portfolio</a></p>
+            <p>Hecho con <svg fill="none" viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                        stroke="currentColor" stroke-width="1" fill="none" />
+                </svg>️ por <a href="https://github.com/joseangelalejo">joseangelalejo</a> · <a
+                    href="https://joseangelhub.miniserver.online">Portfolio</a></p>
         </footer>
     </div>
     <script>
-        (function() {
+        (function () {
             const THEME_KEY = 'app-theme';
             const LANG_KEY = 'app-language';
             const LIGHT = 'light';
@@ -187,9 +461,38 @@ npm run dev</pre>
                     }
                 }
             }
+
+            function updateContent(lang) {
+                // Función simple: actualizar elementos preservando SVG
+                const updateEl = (el, lang) => {
+                    if (!el) return;
+                    const esText = el.getAttribute('data-es');
+                    const enText = el.getAttribute('data-en');
+                    const text = lang === 'es' ? esText : enText;
+                    if (!text) return;
+
+                    const svg = el.querySelector('svg');
+                    if (svg) {
+                        // Preservar SVG, actualizar solo texto
+                        for (let node of el.childNodes) {
+                            if (node.nodeType === 3 && node.textContent.trim()) {
+                                node.textContent = ' ' + text;
+                                break;
+                            }
+                        }
+                    } else {
+                        el.textContent = text;
+                    }
+                };
+
+                // Actualizar todos con data-es/data-en
+                document.querySelectorAll('[data-es][data-en]').forEach(el => updateEl(el, lang));
+            }
+
             function setLang(l) {
                 localStorage.setItem(LANG_KEY, l);
                 document.documentElement.lang = l;
+                updateContent(l);
             }
             function createToolbar() {
                 if (document.getElementById('theme-lang-toolbar')) return;
@@ -240,6 +543,7 @@ npm run dev</pre>
                     setLang(newL);
                     langBtn.textContent = newL === ES ? 'ES' : 'EN';
                     langBtn.title = newL === ES ? 'Switch to English' : 'Cambiar a Español';
+                    updateContent(newL);
                 };
                 tb.appendChild(darkBtn);
                 tb.appendChild(separator);
@@ -274,4 +578,5 @@ npm run dev</pre>
         })();
     </script>
 </body>
+
 </html>
