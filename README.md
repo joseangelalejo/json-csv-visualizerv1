@@ -2,7 +2,7 @@
 
 Aplicación web moderna para explorar archivos **JSON/CSV** y conectarse a múltiples bases de datos. Tablas interactivas, gráficos dinámicos, diagramas ER automáticos e IDE SQL integrado con Monaco Editor.
 
-🌐 **[json-csv-visualizerv1.vercel.app](https://json-csv-visualizerv1.vercel.app)**
+🌐 **[data-visualizer-web-ide.vercel.app](https://data-visualizer-web-ide.vercel.app)**
 
 <div align="center">
 
@@ -48,8 +48,8 @@ Aplicación web moderna para explorar archivos **JSON/CSV** y conectarse a múlt
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/joseangelalejo/json-csv-visualizerv1.git
-cd json-csv-visualizerv1
+git clone https://github.com/joseangelalejo/data-visualizer-web-ide.git
+cd data-visualizer-web-ide
 
 # Instalar dependencias
 npm install
@@ -88,18 +88,18 @@ docker-compose up -d
 
 ## 📚 Documentación
 
-→ **[joseangelalejo.github.io/json-csv-visualizerv1](https://joseangelalejo.github.io/json-csv-visualizerv1/)**
+→ **[joseangelalejo.github.io/data-visualizer-web-ide](https://joseangelalejo.github.io/data-visualizer-web-ide/)**
 
 ## 🔗 Enlaces
 
-- 🌐 [Sitio en vivo](https://json-csv-visualizerv1.vercel.app)
-- 📖 [Documentación](https://joseangelalejo.github.io/json-csv-visualizerv1/)
-- ♻️ [GitHub Repo](https://github.com/joseangelalejo/json-csv-visualizerv1)
-- 🐛 [Reportar bugs](https://github.com/joseangelalejo/json-csv-visualizerv1/issues)
+- 🌐 [Sitio en vivo](https://data-visualizer-web-ide.vercel.app)
+- 📖 [Documentación](https://joseangelalejo.github.io/data-visualizer-web-ide/)
+- ♻️ [GitHub Repo](https://github.com/joseangelalejo/data-visualizer-web-ide)
+- 🐛 [Reportar bugs](https://github.com/joseangelalejo/data-visualizer-web-ide/issues)
 
 ```bash
-git clone https://github.com/joseangelalejo/json-csv-visualizerv1.git
-cd json-csv-visualizerv1
+git clone https://github.com/joseangelalejo/data-visualizer-web-ide.git
+cd data-visualizer-web-ide
 cp .env.example .env          # o `cp .env.example .env.local`
 # Genera un JWT_SECRET fuerte (ejemplo):
 #   node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
@@ -113,8 +113,8 @@ Accede a `http://localhost` (o `http://localhost:80` si usas el proxy `nginx`)
 ### Opción 2: 💻 Desarrollo Local
 
 ```bash
-git clone https://github.com/joseangelalejo/json-csv-visualizerv1.git
-cd json-csv-visualizerv1
+git clone https://github.com/joseangelalejo/data-visualizer-web-ide.git
+cd data-visualizer-web-ide
 npm install
 npm run dev
 ```
