@@ -70,10 +70,10 @@ npm start
 
 ```bash
 # Build
-docker build -t json-csv-visualizer .
+docker build -t data-visualizer-web-ide .
 
 # Run
-docker run -p 3000:3000 json-csv-visualizer
+docker run -p 3000:3000 data-visualizer-web-ide
 # O con docker-compose
 docker-compose up -d
 ```
