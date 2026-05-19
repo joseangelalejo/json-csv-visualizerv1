@@ -27,7 +27,7 @@ import '@xyflow/react/dist/style.css';
  */
 export const metadata: Metadata = {
   title: "Data Visualizer",
-  description: "Visualiza datos de JSON/CSV y bases de datos con diagramas ER",,
+  description: "Visualiza datos de JSON/CSV y bases de datos con diagramas ER",
   robots: {
     index: true,
     follow: true,
